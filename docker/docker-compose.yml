@@ -1,0 +1,29 @@
+version: '2.1'
+
+services:
+    ldap:
+        build: ldap
+        ports:
+            - "389:389"
+        environment:
+            LDAP_TLS:    "false"
+        command: --loglevel debug
+
+    gerrit:
+        image: openfrontier/gerrit:${GERRIT_VERSION:-latest}
+        ports:
+            - "8080:8080"
+            - "29418:29418"
+        links:
+            - "ldap"
+        environment:
+            WEBURL:           http://localhost:8080/
+            HTTPD_LISTENURL:  http://*:8080/
+            AUTH_TYPE:        LDAP
+            AUTH_GIT_BASIC_AUTH_POLICY: HTTP_LDAP
+            LDAP_SERVER:      ldap
+            # This is default settins from openldap
+            LDAP_USERNAME:    cn=admin,dc=example,dc=org
+            LDAP_PASSWORD:    admin
+            # This is how openldap was customised
+            LDAP_ACCOUNTBASE: ou=users,dc=example,dc=org

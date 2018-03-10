@@ -1,0 +1,4 @@
+dn: ou=groups, {{ LDAP_BASE_DN }}
+objectClass: organizationalUnit
+objectClass: top
+ou: Groups

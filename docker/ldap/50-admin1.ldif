@@ -1,0 +1,14 @@
+dn: uid=admin1,ou=users,{{ LDAP_BASE_DN }}
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+cn: admin1
+uid: admin1
+sn: Admin1
+displayName: Admin A. One
+mail: admin1@example.org
+uidNumber: 10000
+gidNumber: 100
+homeDirectory: /home/admin1
+loginShell: /bin/bash
+userPassword: {SSHA}20jtSTQnlOPn1oUllibw+1Kud/vYTAFN
